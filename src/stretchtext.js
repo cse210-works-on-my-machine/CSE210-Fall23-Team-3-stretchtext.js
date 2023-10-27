@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-
+	//
 	var TITLE_WHEN_CLOSED = 'Expand';
 	var TITLE_WHEN_OPEN = 'Collapse';
 
