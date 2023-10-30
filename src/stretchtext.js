@@ -13,9 +13,20 @@ const requestAnimationFrame =
 	window.msRequestAnimationFrame     ||
 	callbackInvoker;
 
-
+/**
+ * Determines if the given summary element is a block-level detail.
+ * 
+ * @param {Element} summary - The summary element to check.
+ * @returns {boolean} - True if the summary element is a block-level detail, false otherwise.
+ */
 const isBlockLevelDetail = summary => summary.nodeName.toLowerCase() === 'a';
 
+/**
+ * Toggles the animation of the summary and detail elements.
+ * 
+ * @param {Element} summary - The summary element to toggle.
+ * @param {Element} detail - The detail element to toggle.
+ */
 function toggleSummaryAnimation(summary, detail){
 	summary.classList.toggle('stretchtext-open');
 	detail.classList.toggle('stretchtext-open');
@@ -27,6 +38,11 @@ function toggleSummaryAnimation(summary, detail){
 	}
 }
 
+/**
+ * Toggles the animation of the summary and detail elements.
+ * 
+ * @param {Event} evt - The event object.
+ */
 function toggleSummary(evt){
 	// Prevent the text from being selected if rapidly clicked.
 	evt.preventDefault();
@@ -47,6 +63,12 @@ function toggleSummary(evt){
 	requestAnimationFrame(toggleSummaryAnimation(summary, detail));
 }
 
+/**
+ * Sets the title attribute of the summary element.
+ * 
+ * @param {Element} summary - The summary element to set the title for.
+ * @param {string} title - The title to set.
+ */
 function setTitle(summary, title){
 	// If the user placed a manual title on the summary leave it alone.
 	if (summary.hasAttribute('title')){
@@ -56,10 +78,22 @@ function setTitle(summary, title){
 	}
 }
 
+/**
+ * Determines the detail element for the given summary element based on whether it is block level.
+ * 
+ * @param {Element} summary - The summary element.
+ * @returns {Element} - The detail element.
+ */
 const findDetailFor = summary => isBlockLevelDetail(summary) ? 
 								findDetailForBlockLevel(summary) : 
 								findDetailForNonBlockLevel(summary);
 
+/**
+ * Finds the detail element for the given block level summary element.
+ * 
+ * @param {Element} summary - The block level summary element.
+ * @returns {Element} - The detail element.
+ */
 function findDetailForBlockLevel(summary){
 	let id = summary.getAttribute('href').replace(/^#/, '');
 	let detail = document.getElementById(id);
@@ -69,6 +103,12 @@ function findDetailForBlockLevel(summary){
 	return detail;
 }
 
+/**
+ * Finds the detail element for the given non-block level summary element.
+ * 
+ * @param {Element} summary - The non-block level summary element.
+ * @returns {Element} - The detail element.
+ */
 function findDetailForNonBlockLevel(summary){
 	let detail = summary.nextElementSibling;
 	if (!detail && window.console){
@@ -77,6 +117,11 @@ function findDetailForNonBlockLevel(summary){
 	return detail;
 }
 
+/**
+ * Retrieves all summary elements in the document.
+ * 
+ * @returns {Array} - An array of summary elements.
+ */
 function getSummaries(){
 	let results = [];
 	let summaries;
@@ -92,8 +137,12 @@ function getSummaries(){
 	return results;
 }
 
+/**
+ * Sets up the given summary element.
+ * 
+ * @param {Element} summary - The summary element to setup.
+ */
 function setupSummary(summary){
-	// FIXME(slightlyoff): Add global handlers instead of one per item.
 	summary.setAttribute('title', TITLE_WHEN_CLOSED);
 	// Listen on mousedown instead of click so that we can prevent text
 	// selection if mouse is clicked rapidly.
@@ -106,18 +155,18 @@ function setupSummary(summary){
 	summary.addEventListener('click', (e) => {e.preventDefault()});
 }
 
+/**
+ * Sets up all summary elements in the document once the window has loaded.
+ */
 function loaded(){
-	// FIXME(slightlyoff): Add global handlers instead of one per item.
 	getSummaries().forEach((summary) => {setupSummary(summary)});
 }
 
 window.addEventListener('load', loaded)
 
-// TODO: 
-// write comment documentation for each function
+// TODO:
 // unit testing
 // look through CSS for possible improvements
-// improve HTML demonstration
 // look into ES6 modules more
 // think about global handlers
 // think about architectural changes such as changing <a> tags used to <div> etc, or a custom tag
