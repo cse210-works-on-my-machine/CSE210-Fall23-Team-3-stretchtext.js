@@ -167,7 +167,12 @@
 	module.exports = {
 		isBlockLevelDetail,
 		setTitle,
-		findDetailFor
+		findDetailFor,
+		toggleSummaryAnimation, 
+		findDetailForBlockLevel, 
+		findDetailForNonBlockLevel, 
+		getSummaries, 
+		setupSummary
 	  };
 }
 
