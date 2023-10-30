@@ -167,6 +167,5 @@ window.addEventListener('load', loaded)
 // TODO:
 // unit testing
 // look through CSS for possible improvements
-// look into ES6 modules more
 // think about global handlers
 // think about architectural changes such as changing <a> tags used to <div> etc, or a custom tag
