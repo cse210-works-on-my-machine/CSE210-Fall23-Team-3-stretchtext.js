@@ -1,7 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-const { toggleSummary, isBlockLevelDetail, setTitle, findDetailFor } = require('../src/stretchtext.js');
+const {isBlockLevelDetail, setTitle, findDetailFor} = require('../src/stretchtext.js');
 
 describe('isBlockLevelDetail', () => {
   test('should return true for an "a" element', () => {

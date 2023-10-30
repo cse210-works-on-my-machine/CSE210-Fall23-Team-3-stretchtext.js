@@ -11,5 +11,11 @@
     "jest-environment-jsdom": "^29.7.0",
     "jsdoc": "^4.0.2"
   },
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
+  "scripts": {
+    "test": "jest"
+  },
   "type": "module"
 }

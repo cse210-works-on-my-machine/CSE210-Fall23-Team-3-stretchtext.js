@@ -163,6 +163,12 @@
 	}
 
 	window.addEventListener('load', loaded)
+
+	module.exports = {
+		isBlockLevelDetail,
+		setTitle,
+		findDetailFor
+	  };
 }
 
 // TODO:
