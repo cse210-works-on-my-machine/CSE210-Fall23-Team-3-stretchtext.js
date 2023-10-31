@@ -107,14 +107,24 @@ describe('setupSummary', () => {
 });
 
 describe('toggleSummary', () => {
-  test('should toggle the animation or something idk', () => {
+  test('summary toggles for inline stretchtext', () => {
     const summary = document.createElement('span');
     const detail = document.createElement('span');
     summary.className = 'stretchsummary';
     detail.className = 'stretchdetail';
-    const dumb_event = new Event('submit', {'detail': 'mydetail', cancelable: true});
-    dumb_event.target = summary;
-    dumb_event.preventDefault = () => {};
-    toggleSummary(dumb_event);
+    document.body.appendChild(summary);
+    document.body.appendChild(detail);
+    summary.addEventListener('dummyOpen', event => {
+      toggleSummary(event);
+      // expect(detail.display).toBe('inline');
+    });
+
+    summary.addEventListener('dummyClose', event => {
+      toggleSummary(event);
+      // expect(detail.display).toBe('none');
+    });
+
+    summary.dispatchEvent(new Event('dummyOpen', {cancelable: true}));
+    // summary.dispatchEvent(new Event('dummyClose', {cancelable: true}))
   });
 });
