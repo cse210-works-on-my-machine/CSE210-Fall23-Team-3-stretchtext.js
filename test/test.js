@@ -1,4 +1,4 @@
-const {isBlockLevelDetail, setTitle, findDetailFor, toggleSummaryAnimation, findDetailForBlockLevel, findDetailForNonBlockLevel, getSummaries, setupSummary} = require('../src/stretchtext.js');
+const {toggleSummary, isBlockLevelDetail, setTitle, findDetailFor, toggleSummaryAnimation, findDetailForBlockLevel, findDetailForNonBlockLevel, getSummaries, setupSummary, } = require('../src/stretchtext.js');
 
 describe('isBlockLevelDetail', () => {
   test('should return true for an "a" element', () => {
@@ -103,5 +103,18 @@ describe('setupSummary', () => {
     expect(summary.getAttribute('title')).toBe('Expand');
     expect(summary.mousedown).not.toBe(null);
     expect(summary.touchstart).not.toBe(null);
+  });
+});
+
+describe('toggleSummary', () => {
+  test('should toggle the animation or something idk', () => {
+    const summary = document.createElement('span');
+    const detail = document.createElement('span');
+    summary.className = 'stretchsummary';
+    detail.className = 'stretchdetail';
+    const dumb_event = new Event('submit', {'detail': 'mydetail', cancelable: true});
+    dumb_event.target = summary;
+    dumb_event.preventDefault = () => {};
+    toggleSummary(dumb_event);
   });
 });

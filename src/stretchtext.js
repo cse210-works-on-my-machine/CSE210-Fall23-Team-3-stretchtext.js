@@ -165,6 +165,7 @@
 	window.addEventListener('load', loaded)
 
 	module.exports = {
+		toggleSummary,
 		isBlockLevelDetail,
 		setTitle,
 		findDetailFor,
